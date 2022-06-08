@@ -1,0 +1,127 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+  <groupId>com.reddate</groupId>
+  <artifactId>china-trust-parent</artifactId>
+  <version>0.0.1</version>
+  <relativePath>../pom.xml</relativePath>
+  </parent>
+
+
+<!--   <groupId>com.reddate</groupId>-->
+   <artifactId>china-trust-sdk</artifactId>
+<!--   <version>0.0.1</version>-->
+  <packaging>jar</packaging>
+
+  <name>china-trust-sdk</name>
+<!--   <url>http://maven.apache.org</url> -->
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <web3sdk.version>2.6.4</web3sdk.version>
+  </properties>
+
+  <dependencies>
+      <dependency>
+          <groupId>com.reddate</groupId>
+          <artifactId>ddc.did.sdk</artifactId>
+          <version>1.0</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-log4j12</artifactId>
+              </exclusion>
+              <exclusion>
+                  <groupId>org.fisco-bcos</groupId>
+                  <artifactId>web3sdk</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>org.reddate.ddc</groupId>
+          <artifactId>ddc-sdk-taian</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-log4j12</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>net.sf.oval</groupId>
+          <artifactId>oval</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>org.fisco.bcos</groupId>
+          <artifactId>web3sdk</artifactId>
+          <version>2.4.0</version>
+          <scope>system</scope>
+          <systemPath>${pom.basedir}/libs/web3sdk.jar</systemPath>
+      </dependency>
+
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.13.1</version>
+          <scope>test</scope>
+      </dependency>
+
+  </dependencies>
+  
+  <build>
+  	<finalName>china-trust-sdk-${project.version}</finalName>
+  		<plugins>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+  </build>
+</project>

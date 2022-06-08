@@ -1,21 +1,28 @@
-### 一、介绍 
-ChinaTrust 供众多有凭证场景的业务系统集成的中间件，辅助其业务系统结合区块链技术向数字信息化转型，提高业务在各环节的执行效率，保障凭证数据在各环节流转过程中的信息安全。
-ChinaTrust 旨在定义一套标准的中间件供更多的行业应用使用，助力于传统的业务平台结合区块链技术向数字信息化转型，提高业务在各环节的执行效率，保证数据在各个环节的流转过程中的安全，减少业务对接过程。
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-### 二、使用说明
-ChinaTrust 的核心代码都在 SDK（Java 语言开发） 内，为了便于不同语言开发的业务平台集成，所以我们对 SDK 进行了一次包装输出了相应的一些 API，业务平台如果也是 Java 语言实现，则建议内部直接集成 SDK；如果是其它语言实现，可以通过调用 API 的方式进行快速接入。
+    <groupId>com.redate</groupId>
+    <artifactId>china-trust-server</artifactId>
+    <version>0.0.1</version>
+    <name>china-trust-server</name>
+    <description>China Trust Demo project for Spring Boot</description>
 
-### 三、准备事项
--   **安装 Java 1.8 or later**
+    <properties>
+        <java.version>1.8</java.version>
+        <web3j.version>4.8.4</web3j.version>
+        <oval.version>1.90</oval.version>
+    </properties>
 
-*  **构建 mvn clean install -Dmaven.test.skip=true**
-
-* **启动  java -jar china-trust-server-0.0.1.jar**
-
-### 四、依赖配置
-
-```
-      <dependency>
+    <dependencies>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
@@ -105,22 +112,40 @@ ChinaTrust 的核心代码都在 SDK（Java 语言开发） 内，为了便于�
             <version>2.4.0</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/web3sdk.jar</systemPath>
-        </dependency> 
-```
-### 五、用法
-请参见 ChinaTrust 接口文档。
+        </dependency>
+        <!--<dependency>
+            <groupId>com.github.ipfs</groupId>
+            <artifactId>java-ipfs-http-client</artifactId>
+            <version>v1.3.3</version>
+        </dependency>-->
+    </dependencies>
+    <!--<repositories>
+        <repository>
+            <id>SciJava</id>
+            <url>http://maven.scijava.org/content/repositories/public/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-### 六、参数解释
--   **version: 版本**
-*  **reference: BSN 泰安链上生成的 DDC**
-*  **issuanceDate: 签发日期**
-*  **issuer: 签发人**
-*  **type: 类型**
-*  **credentialSubject: 证书**
-*  **metadata: 元数据**
-*  **privateKey: 私钥**
-*  **publicKey: 公钥**
-*  **didClient: did客户端**
-*  **ddcClient: ddc客户端**
-*  **tx: 交易哈希**
-*  **chainAccAddress: 链账户地址**
+</project>
